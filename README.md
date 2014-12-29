@@ -1,4 +1,4 @@
 cloudsearch
 ===========
 
-Business logic for interacting with Amazon Cloudsearch using node.js
+Business logic for interacting with the Amazon Cloudsearch api using node.js.
