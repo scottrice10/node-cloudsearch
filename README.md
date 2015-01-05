@@ -1,7 +1,7 @@
 node-cloudsearch
 ===========
 
-Scripts for interacting with the Amazon Cloudsearch api using node.js. The scripts perform the following tasks:
+Scripts for interacting with the Amazon Cloudsearch api using node.js. Each script can be ran at the command line using node. The scripts perform the following tasks:
 
 1. format documents to be indexed as json objects
 2. batch add and update documents
