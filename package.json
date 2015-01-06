@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "node-uuid": "*",
-    "fs": "*",
+    "request": "*",
     "aws-sdk": "*"
   }
 }
