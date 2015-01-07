@@ -1,6 +1,4 @@
-// This script expects an array of json objects.
-// It 1) adds id and type fields to each object, since Cloudsearch expects all JSON objects to have these fields, and
-// 2) converts any value fields that are of type "object" to type string, since Cloudsearch cannot index json objects as field values.
+// This script indexes documents in Cloudsearch.
 var csd = require('./cloudsearchifyDocuments.js');
 var AWS = require('aws-sdk');
 var request = require('request');
@@ -19,7 +17,7 @@ exports.indexDocuments = function(data) {
     documents: csd.cloudsearchifyDocuments(data)
   };
 
-  cloudsearchdomain.uploadDocuments(params, function(err, data) {
+  return cloudsearchdomain.uploadDocuments(params, function(err, data) {
     if(err) {
       console.log(err, err.stack);
     }
@@ -40,13 +38,13 @@ var recurse = function(i){
     count += response.length;
     if(!error){
       var data = exports.indexDocuments(response);
-      console.log(count + " documents indexed!", data);
+      console.log(count + " documents indexed!");
     }
 
     if(response.length === 1000){
       recurse(i + 1)
     } else {
-      return;
+      process.exit();
     }
   });
 };

@@ -1,6 +1,5 @@
-// This script expects an array of json objects.
-// It 1) adds id and type fields to each object, since Cloudsearch expects all JSON objects to have these fields, and
-// 2) converts any value fields that are of type "object" to type string, since Cloudsearch cannot index json objects as field values.
+// This script deletes documents from Cloudsearch.
+// **Limit is deleting 10000 documents at a time.
 var AWS = require('aws-sdk');
 
 //AWS configuration
@@ -15,7 +14,7 @@ exports.deleteAllDocuments = function() {
     query: '(matchall)', /* required */
     queryParser: 'structured',
     return: '_no_fields',
-    size: "5000"
+    size: "10000"
   };
 
   cloudsearchdomain.search(params, function(err, data) {
@@ -43,7 +42,12 @@ exports.deleteDocuments = function(docs){
       console.log(err, err.stack);
     }
     else {
-      console.log("Deleted all documents.", data);
+      console.log("Deleted " + data.deletes +  " documents.");
+      if(data.deletes === 10000){
+        exports.deleteAllDocuments();
+      } else {
+        process.exit();
+      }
     }
   });
 };
