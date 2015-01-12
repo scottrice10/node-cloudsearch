@@ -6,6 +6,7 @@
   "dependencies": {
     "node-uuid": "*",
     "request": "*",
-    "aws-sdk": "*"
+    "aws-sdk": "*",
+    "q": "*"
   }
 }

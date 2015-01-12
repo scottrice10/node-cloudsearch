@@ -1,21 +1,15 @@
 // This script deletes documents from Cloudsearch.
 // **Limit is deleting 10000 documents at a time.
-var AWS = require('aws-sdk');
+var cloudsearchdomain = require(__dirname + "/../config/endpoints").cloudsearchdomain;
 var totalDeletes = 0;
 
-//AWS configuration
-AWS.config.loadFromPath('./config.json');
-var cloudsearchdomain = new AWS.CloudSearchDomain({
-  endpoint: 'http://doc-imorgo-o7j3rjbk2ekyfkupbetbyfjoym.us-west-2.cloudsearch.amazonaws.com',
-  apiVersion: '2013-01-01'
-});
-
+var numberToDelete = 10;
 exports.deleteAllDocuments = function() {
   var params = {
     query: '(matchall)', /* required */
     queryParser: 'structured',
     return: '_no_fields',
-    size: "10000"
+    size: numberToDelete.toString()
   };
 
   cloudsearchdomain.search(params, function(err, data) {
@@ -45,7 +39,7 @@ exports.deleteDocuments = function(docs){
     else {
       totalDeletes += data.deletes;
       console.log("Deleted " + totalDeletes +  " documents.");
-      if(data.deletes === 10000){
+      if(data.deletes === numberToDelete){
         exports.deleteAllDocuments();
       } else {
         process.exit();
