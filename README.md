@@ -9,5 +9,3 @@ node cloudsearchifyDocuments.js
 ``` 
 2. batch add and update documents
 3. delete all documents to put index back into clean state
-
-This repo is one part of [Imorgo](https://github.com/scottrice10/imorgo), a health insurance exchange search application.
