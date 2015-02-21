@@ -1,8 +1,9 @@
 var cloudsearch = require(__dirname + "/../config/endpoints").cloudsearch;
+var toDomain = require(__dirname + "/../config/endpoints").toDomain;
 
 exports.createDomain = function(domainName){
   var params = {
-    DomainName: domainName
+    DomainName: toDomain
   };
 
   cloudsearch.createDomain(params, function(err, data) {
@@ -10,9 +11,9 @@ exports.createDomain = function(domainName){
       console.log(err, err.stack);
     }
     else    {
-      console.log(domainName + " was successfully created.");
+      console.log(toDomain + " was successfully created.");
     }
   });
 };
 
-//exports.createDomain();
+exports.createDomain();

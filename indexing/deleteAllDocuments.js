@@ -3,13 +3,13 @@
 var cloudsearchdomain = require(__dirname + "/../config/endpoints").cloudsearchdomain;
 var totalDeletes = 0;
 
-var numberToDelete = 10;
+var numberToDelete = 1000;
 exports.deleteAllDocuments = function() {
   var params = {
     query: '(matchall)', /* required */
     queryParser: 'structured',
     return: '_no_fields',
-    size: numberToDelete.toString()
+    size: numberToDelete
   };
 
   cloudsearchdomain.search(params, function(err, data) {
